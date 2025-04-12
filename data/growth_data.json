@@ -1,0 +1,43 @@
+[
+    {
+      "plant_height": 12.5,
+      "height_diff": 0.7
+    },
+    {
+      "plant_height": 13.2,
+      "height_diff": 0.7
+    },
+    {
+      "plant_height": 13.7,
+      "height_diff": 0.5
+    },
+    {
+      "plant_height": 14.4,
+      "height_diff": 0.7
+    },
+    {
+      "plant_height": 15.0,
+      "height_diff": 0.6
+    },
+    {
+      "plant_height": 15.4,
+      "height_diff": 0.4
+    },
+    {
+      "plant_height": 16.0,
+      "height_diff": 0.6
+    },
+    {
+      "plant_height": 16.6,
+      "height_diff": 0.6
+    },
+    {
+      "plant_height": 17.3,
+      "height_diff": 0.7
+    },
+    {
+      "plant_height": 17.9,
+      "height_diff": 0.6
+    }
+  ]
+  

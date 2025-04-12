@@ -1,0 +1,83 @@
+[
+    {
+      "soil_moisture": 34,
+      
+      "light_level": 1200,
+      "temperature": 22.5,
+      "humidity": 55.0,
+      "co2_level": 410
+    },
+    {
+      "soil_moisture": 33,
+      
+      "light_level": 1220,
+      "temperature": 22.8,
+      "humidity": 53.2,
+      "co2_level": 415
+    },
+    {
+      "soil_moisture": 36,
+      
+      "light_level": 1180,
+      "temperature": 23.0,
+      "humidity": 54.0,
+      "co2_level": 420
+    },
+    {
+      "soil_moisture": 30,
+      
+      "light_level": 1300,
+      "temperature": 23.5,
+      "humidity": 52.8,
+      "co2_level": 418
+    },
+    {
+      "soil_moisture": 37,
+      
+      "light_level": 1100,
+      "temperature": 21.9,
+      "humidity": 56.1,
+      "co2_level": 422
+    },
+    {
+      "soil_moisture": 35,
+      
+      "light_level": 1250,
+      "temperature": 23.1,
+      "humidity": 54.4,
+      "co2_level": 419
+    },
+    {
+      "soil_moisture": 32,
+      
+      "light_level": 1280,
+      "temperature": 22.7,
+      "humidity": 55.2,
+      "co2_level": 421
+    },
+    {
+      "soil_moisture": 29,
+      
+      "light_level": 1150,
+      "temperature": 21.5,
+      "humidity": 57.0,
+      "co2_level": 416
+    },
+    {
+      "soil_moisture": 38,
+      
+      "light_level": 1320,
+      "temperature": 23.6,
+      "humidity": 53.5,
+      "co2_level": 413
+    },
+    {
+      "soil_moisture": 31,
+  
+      "light_level": 1240,
+      "temperature": 22.3,
+      "humidity": 56.5,
+      "co2_level": 417
+    }
+  ]
+  

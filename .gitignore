@@ -1,0 +1,16 @@
+# 환경 변수 파일
+.env
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+
+# 가상환경 (혹시 폴더로 생성했다면)
+venv/
+env/
+
+# VSCode 설정 (협업 시 무시해도 OK)
+.vscode/
+
+# Mac 시스템 파일 (혹시 Mac에서 열었을 경우 대비)
+.DS_Store
