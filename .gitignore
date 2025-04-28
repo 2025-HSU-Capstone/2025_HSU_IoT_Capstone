@@ -1,0 +1,10 @@
+# 데이터셋 업로드 방지
+YOLOdataset/
+
+# 학습 결과(runs)
+runs/
+
+# 불필요한 파일 업로드 방지
+.DS_Store
+
+yolov8n.pt
