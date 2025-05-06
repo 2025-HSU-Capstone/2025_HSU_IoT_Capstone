@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from app.models.models import EnvData
+from app.models.db_tables import EnvData
 
 def insert_env_data(db):
     path = Path("data/env_data.json")

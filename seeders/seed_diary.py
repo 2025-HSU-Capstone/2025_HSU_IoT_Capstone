@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from app.models.models import DiaryEntry
+from app.models.db_tables import DiaryEntry
 
 def insert_diary_entries(db):
     path = Path("data/diary_entries.json")

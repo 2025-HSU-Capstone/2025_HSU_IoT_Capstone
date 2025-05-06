@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from app.models.models import Photo
+from app.models.db_tables import Photo
 
 def insert_photos(db):
     path = Path("data/photos.json")

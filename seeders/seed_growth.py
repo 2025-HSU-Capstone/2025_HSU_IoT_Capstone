@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from app.models.models import GrowthData
+from app.models.db_tables import GrowthData
 
 def insert_growth_data(db):
     path = Path("data/growth_data.json")

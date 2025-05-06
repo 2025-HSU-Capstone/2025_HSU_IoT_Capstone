@@ -1,7 +1,7 @@
 #ORM 테이블들 모음 #DB테이블 정의
 from sqlalchemy import Column, Integer, Float, String, Date, ForeignKey, Text
 from sqlalchemy.orm import relationship
-from app.database import Base
+from app.db.database import Base
 
 class GrowthData(Base):
     __tablename__ = "growth_data"
@@ -13,7 +13,6 @@ class EnvData(Base):
     __tablename__ = "env_data"
     id = Column(Integer, primary_key=True, index=True)
     soil_moisture = Column(Integer)
-    soil_status = Column(Float)
     light_level = Column(Integer)
     temperature = Column(Float)
     humidity = Column(Float)
@@ -40,6 +39,8 @@ class PlantLog(Base):
     photo_id = Column(Integer, ForeignKey("photos.id"))
     diary_id = Column(Integer, ForeignKey("diary_entries.id"))
     event = Column(String(255))
+    day = Column(String(10))
+
 
     height = relationship("GrowthData")
     env = relationship("EnvData")
