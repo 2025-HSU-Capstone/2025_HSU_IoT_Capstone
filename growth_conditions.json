@@ -1,0 +1,6 @@
+{
+    "temperature": { "min": 20, "max": 30 },
+    "humidity": { "min": 50, "max": 70 },
+    "light_cycle": { "on": "07:00", "off": "19:00" },
+    "watering_interval_hours": 24
+  }
