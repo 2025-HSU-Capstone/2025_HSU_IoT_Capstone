@@ -9,7 +9,7 @@ arduino = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
 time.sleep(2)
 
 # ✅ JSON 파일 경로 확인 및 로드
-json_path = "growth_conditions.json"
+json_path = "env.json"
 if not os.path.exists(json_path):
     raise FileNotFoundError(f"❌ {json_path} 파일이 존재하지 않습니다.")
 
