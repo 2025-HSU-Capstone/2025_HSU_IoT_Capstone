@@ -10,6 +10,9 @@ from app.models import db_tables
 from app.api import timelapse_router
 from app.api import growth_chart_router
 from app.api import diary_router
+from app.api import upload_photo_router
+from app.api import trigger_env_router
+from app.api import plant_env_router 
 #프론트 요청 허용
 from fastapi.middleware.cors import CORSMiddleware
 #브라우저에 정적 파일 서빙
@@ -28,7 +31,7 @@ app.mount("/images", StaticFiles(directory="images"), name="images")
 #CORSMi
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # 또는 ["*"] 전체 허용
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # 또는 ["*"] 전체 허용
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,6 +43,12 @@ app.include_router(timelapse_router.router)
 app.include_router(growth_chart_router.router)
 
 app.include_router(diary_router.router)
+
+app.include_router(upload_photo_router.router)
+
+app.include_router(trigger_env_router.router)
+
+app.include_router(plant_env_router.router) 
 
 @app.get("/")
 def root():

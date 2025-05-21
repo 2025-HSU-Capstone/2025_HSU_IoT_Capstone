@@ -1,4 +1,6 @@
 #ORM 테이블들 모음 #DB테이블 정의
+#테이블 만들고 서버 키면 생김(중복x)
+# ✅ db_tables.py (수정됨)
 from sqlalchemy import Column, Integer, Float, String, Date, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from app.db.database import Base
@@ -18,17 +20,10 @@ class EnvData(Base):
     humidity = Column(Float)
     co2_level = Column(Integer)
 
-class Photo(Base):
-    __tablename__ = "photos"
-    id = Column(Integer, primary_key=True, index=True)
-    photo_path = Column(Text)
-   
-
 class DiaryEntry(Base):
     __tablename__ = "diary_entries"
     id = Column(Integer, primary_key=True, index=True)
     content = Column(Text)
-    
 
 class PlantLog(Base):
     __tablename__ = "plant_logs"
@@ -36,13 +31,30 @@ class PlantLog(Base):
     log_date = Column(Date)
     height_id = Column(Integer, ForeignKey("growth_data.id"))
     env_id = Column(Integer, ForeignKey("env_data.id"))
-    photo_id = Column(Integer, ForeignKey("photos.id"))
     diary_id = Column(Integer, ForeignKey("diary_entries.id"))
     event = Column(String(255))
     day = Column(String(10))
 
-
     height = relationship("GrowthData")
     env = relationship("EnvData")
-    photo = relationship("Photo")
     diary = relationship("DiaryEntry")
+    photos = relationship("Photo", back_populates="log", cascade="all, delete")
+
+class Photo(Base):
+    __tablename__ = "photos"
+    id = Column(Integer, primary_key=True, index=True)
+    photo_path = Column(Text)
+    log_id = Column(Integer, ForeignKey("plant_logs.id"))
+
+    log = relationship("PlantLog", back_populates="photos")
+
+class PlantEnvProfile(Base):
+    __tablename__ = "plant_env_profiles"
+
+    id = Column(Integer, primary_key=True, index=True)
+    plant_name = Column(String(100), unique=True, index=True)  # 예: "상추"
+    temperature = Column(Float)
+    humidity = Column(Float)
+    co2 = Column(Integer)
+    light = Column(Integer)
+    soil_moisture = Column(Integer)
