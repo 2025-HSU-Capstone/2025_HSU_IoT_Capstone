@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { DiaryCard} from './styles/styledComponents';
+import { PlantSpeech, ChatRight } from './styles/styledComponents';
+
 
 const TimelapseViewer = () => {
   const [images, setImages] = useState([]);
@@ -63,78 +66,61 @@ const TimelapseViewer = () => {
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h1 style={{
-        fontSize: '2.25rem',
-        fontWeight: 700,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        marginBottom: '1rem'
-      }}>
-        📸 타임랩스 보기
-      </h1>
+      <PlantSpeech>
+        날짜를 설정하면 자라는 모습을 보여줄게!
+      </PlantSpeech>
+
 
       {isReady && (
-        <div style={{
-          marginBottom: 20,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          flexWrap: 'wrap'
-        }}>
+        <ChatRight>
           <label>시작 날짜:</label>
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            style={{
-              padding: '8px',
-              border: '1px solid #ccc',
-              borderRadius: '8px'
-            }}
           />
-
           <label>종료 날짜:</label>
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            style={{
-              padding: '8px',
-              border: '1px solid #ccc',
-              borderRadius: '8px'
-            }}
+            
           />
 
           <button
             onClick={fetchImages}
           >
-            조회
+            go
           </button>
-        </div>
+        </ChatRight>
       )}
 
       {/* 슬라이드 영역 */}
       {hasQueried && images.length > 0 && (
-        <div style={{ textAlign: 'center' }}>
-          <img
-            src={`http://localhost:8000${images[currentIndex].path}`}
-            alt={`타임랩스 ${images[currentIndex].date}`}
-            style={{
-              width: '300px',
-              height: 'auto',
-              borderRadius: '12px',
-              boxShadow: '0 0 10px rgba(0,0,0,0.1)'
-            }}
-          />
-          <div style={{ fontSize: '1rem', marginTop: '8px' }}>
-            {images[currentIndex].date}
+        <PlantSpeech>
+          <div style={{ textAlign: 'center' }}>
+            <img
+              src={`http://localhost:8000${images[currentIndex].path}`}
+              alt={`타임랩스 ${images[currentIndex].date}`}
+              style={{
+                width: '300px',
+                height: 'auto',
+                borderRadius: '12px',
+                boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+                display: 'block', // ✅ 이거 추가
+                marginLeft: 'auto', // ✅ 이거 추가
+                marginRight: 'auto' // ✅ 이거 추가
+              }}
+            />
+            <div style={{ fontSize: '1rem', marginTop: '8px' }}>
+              {images[currentIndex].date}
+            </div>
           </div>
-        </div>
+        </PlantSpeech>
       )}
 
       {hasQueried && images.length === 0 && (
-        <p style={{ marginTop: 20 }}>📭 해당 날짜 범위에 사진이 없습니다.</p>
+        <PlantSpeech>📭 해당 날짜 범위에 사진이 없습니다</PlantSpeech>
       )}
     </div>
   );

@@ -3,7 +3,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { DateContainer, DateText, SmallPhoto } from './styles/styledComponents';  // 스타일 불러오기
+
+import {
+  DateContainer,
+  DateText,
+  SmallPhoto,
+  DiaryCard,
+  SensorList,
+  SensorItem,
+  DiaryText,
+  ChatLeft,
+  ChatRight,
+  ChatRowLeft, 
+  PlantEmoji,
+  PlantSpeech
+} from './styles/styledComponents';
 
 const AutoDiarySection = () => {
   const [date, setDate] = useState(null);
@@ -41,44 +55,56 @@ const AutoDiarySection = () => {
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h1>📘 자동 식물 일기</h1>
+      {/* 왼쪽 말풍선: 제목 */}
+        <PlantSpeech>
+          내 일기를 보고싶으면 날짜를 입력해
+        </PlantSpeech>
 
-      <DatePicker
-        selected={date}
-        onChange={(d) => setDate(d)}
-        includeDates={availableDates}
-        dateFormat="yyyy-MM-dd"
-        placeholderText="자동일기 있는 날짜만 선택 가능"
-        className="custom-datepicker"
-      />
-      <button onClick={fetchDiary} disabled={!date}>조회</button>
-
-      {data && (
-        <div style={{ marginTop: 20 }}>
-          <DateContainer>
-            <DateText>{data.date} ({data.day})</DateText>
-            <SmallPhoto
-              src={`http://localhost:8000${data.photo_path}`}
-              alt="식물 사진"
-            />
-          </DateContainer>
-
-          <h3>🌱 센서 정보</h3>
-          <ul>
-            <li>📏 오늘 키: {data.sensor_data.height_today}</li>
-            <li>📏 어제 키: {data.sensor_data.height_yesterday}</li>
-            <li>💧 토양 습도: {data.sensor_data.soil_moisture}</li>
-            <li>💡 조도: {data.sensor_data.light}</li>
-            <li>🌡️ 온도: {data.sensor_data.temperature}℃</li>
-            <li>💦 습도: {data.sensor_data.humidity}%</li>
-            <li>🫁 CO₂: {data.sensor_data.co2}ppm</li>
-          </ul>
-
-          <p><b>일기:</b> {data.diary}</p>
+      {/* 오른쪽 말풍선: 날짜 선택 + 버튼 */}
+      <ChatRight>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <DatePicker
+            selected={date}
+            onChange={(d) => setDate(d)}
+            includeDates={availableDates}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="날짜를 골라주세요"
+            className="custom-datepicker"
+          />
+          <button onClick={fetchDiary} disabled={!date}>go</button>
         </div>
+      </ChatRight>
+
+      {/* 결과 일기 카드 */}
+      {data && (
+        <PlantSpeech>
+          <DiaryCard style={{ boxShadow: 'none', marginTop: 0, marginBottom: 0 }}>
+            <DateContainer>
+              <DateText>{data.date} ({data.day})</DateText>
+              <SmallPhoto
+                src={`http://localhost:8000${data.photo_path}`}
+                alt="식물 사진"
+              />
+            </DateContainer>
+
+            <h3>🌱 센서 정보</h3>
+            <SensorList>
+              <SensorItem>📏 오늘 키: {data.sensor_data.height_today}</SensorItem>
+              <SensorItem>📏 어제 키: {data.sensor_data.height_yesterday}</SensorItem>
+              <SensorItem>💧 토양 습도: {data.sensor_data.soil_moisture}</SensorItem>
+              <SensorItem>💡 조도: {data.sensor_data.light}</SensorItem>
+              <SensorItem>🌡️ 온도: {data.sensor_data.temperature}℃</SensorItem>
+              <SensorItem>💦 습도: {data.sensor_data.humidity}%</SensorItem>
+              <SensorItem>🫁 CO₂: {data.sensor_data.co2}ppm</SensorItem>
+            </SensorList>
+
+            <DiaryText><b>일기:</b> {data.diary}</DiaryText>
+          </DiaryCard>
+        </PlantSpeech>
       )}
     </div>
-  );
+
+  )
 };
 
 export default AutoDiarySection;

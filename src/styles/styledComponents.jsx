@@ -1,5 +1,6 @@
 // styledComponents.jsx
-import styled from 'styled-components';
+// styledComponents.jsx
+import styled, {keyframes} from 'styled-components';
 
 export const LayoutWrapper = styled.div`
   width: 100%;
@@ -7,33 +8,7 @@ export const LayoutWrapper = styled.div`
   margin: 0 auto;
   padding: 2rem;
   box-sizing: border-box;
-`;
-
-// DateContainer 스타일 정의
-export const DateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  margin-top: 20px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-export const DateText = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-`;
-
-export const SmallPhoto = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  object-fit: cover;
+  overflow: visible;
 `;
 
 export const Container = styled.div`
@@ -41,7 +16,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  overflow: visible;
 `;
 
 export const HeaderText = styled.h1`
@@ -69,3 +44,236 @@ export const ContentWrapper = styled.div`
     padding: 10px;
   }
 `;
+
+// ✅ 자동일기 전용 카드 스타일
+export const DiaryCard = styled.div`
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 24px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+`;
+
+export const DateContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+`;
+
+export const DateText = styled.div`
+ font-size: 1.75rem;
+  font-weight: bold;
+  color: #1f2937;
+  text-align: left;
+  white-space: nowrap;
+`;
+
+export const SmallPhoto = styled.img`
+   width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+`;
+
+export const SensorList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+export const SensorItem = styled.li`
+  font-size: 0.95rem;
+  margin: 4px 0;
+`;
+
+export const DiaryText = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-line;
+  color: #333;
+`;
+
+
+export const FloatingPlantForm = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 20px 30px auto;
+  padding: 8px 12px;
+  background-color: #e6fbe8;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  color: #2e7d32;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: fit-content;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 100%;
+    border-width: 8px 8px 0 8px;
+    border-style: solid;
+    border-color: #e6fbe8 transparent transparent transparent;
+  }
+`;
+
+
+const swing = keyframes`
+  0%   { transform: rotate(1.2deg); }
+  50%  { transform: rotate(-1.2deg); }
+  100% { transform: rotate(1.2deg); }
+`;
+
+export const HangingSignWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-top: 0px;             /* ✅ 탭에 딱 붙게 */
+  animation: ${swing} 3s ease-in-out infinite;
+  transform-origin: top center;
+`;
+
+export const SignImage = styled.img`
+  width: 260px;
+  display: block;
+  border-radius: 8px;
+`;
+
+export const SignText = styled.div`
+  font-family: 'Gamja Flower', sans-serif;
+  font-weight: normal;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fffbe6;
+  font-weight: 700;
+  font-size: 1.3rem;
+  white-space: nowrap;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+`;
+
+export const LeafHeaderWrapper = styled.div`
+  position: fixed;              // 💡 상단 고정
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;                // ✅ 다른 요소 위에 오게
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 0;
+  background-color: #f4fff5;
+  border-bottom: 1px solid #cceacc;
+`;
+
+export const LeafTab = styled.button`
+  background: linear-gradient(135deg, #a6e6a3, #d2f5d0);
+  color: #2e7d32;
+  border: none;
+  border-radius: 30% 70% 70% 30% / 40% 30% 70% 60%; /* 🍃 나뭇잎형 */
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  &.active {
+    background: linear-gradient(135deg, #6fcf97, #a1e6a5);
+    color: white;
+  }
+`;
+
+// 말풍선 공통
+export const ChatBubble = styled.div`
+  max-width: 75%;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 1rem;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin: 16px 0;
+  line-height: 1.5;
+  word-break: keep-all;
+
+  
+  overflow: visible;
+`;
+
+// 왼쪽 말풍선 (식물)
+export const ChatLeft = styled(ChatBubble)`
+  background-color:rgb(213, 247, 182);
+  margin-right: auto;
+  overflow: visible;
+  
+
+  &::after {
+  content: "";
+  position: absolute;
+  top: 16px; /* 말풍선 안쪽 상단에서 약간 내려온 위치 */
+  left: -12px; /* 바깥으로 밀어냄 */
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 12px solid rgb(213, 247, 182); /* 말풍선 배경색과 맞춰야 함 */
+}
+
+`;
+
+// 오른쪽 말풍선 (사용자)
+export const ChatRight = styled(ChatBubble)`
+  background-color:rgb(220, 249, 255); /* 어두운 파란 계열 */
+  color: white;
+  margin-left: auto;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: -12px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 12px solid rgb(220, 249, 255); /* ✅ 말풍선 배경색과 일치 */
+  }
+`;
+
+
+// 캐릭터+말풍선용 래퍼 추가
+export const ChatRowLeft = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 0;
+`;
+
+export const PlantEmoji = styled.div`
+  font-size: 1.5rem;
+  margin-top: 6px;
+`;
+// 말풍선 아이콘 + 왼쪽 말풍선 묶는 래퍼
+export const PlantSpeech = ({ children }) => (
+  <ChatRowLeft>
+    <PlantEmoji>🪴</PlantEmoji>
+    <ChatLeft>{children}</ChatLeft>
+  </ChatRowLeft>
+);

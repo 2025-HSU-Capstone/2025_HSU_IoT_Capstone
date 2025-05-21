@@ -42,3 +42,14 @@ button {
 button:hover {
   background-color: #d7d6d6;
 }
+
+.custom-datepicker {
+  background-color: #e6faff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  box-shadow: none;
+}
