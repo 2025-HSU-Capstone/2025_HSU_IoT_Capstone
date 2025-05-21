@@ -37,7 +37,9 @@ def generate_env_with_gpt(plant_name: str) -> dict:
   "humidity": float,             // 예: 60.0 (%)
   "co2": int,                   // 예: 400 (ppm)
   "light": int,                // 예: 7000 (lux)
-  "soil_moisture": int          // 예: 70 (%)
+  "soil_moisture": int,         // 예: 70 (%)
+  "watering_amount": int,     // 하루 급수량 (mL 단위, 예: 300)
+  "light_hours": int          // 하루 조명 시간 (예: 12)
 }}
 
 반드시 JSON만 출력해 주세요.
@@ -102,7 +104,7 @@ def set_env_for_plant(request: PlantRequest, db: Session = Depends(get_db)):
         humidity=float(env["humidity"]),
         co2=int(env["co2"]),
         light=int(env["light"]),
-        soil_moisture=int(env["soil_moisture"])
+        soil_moisture=int(env["soil_moisture"]),
     )
     db.add(profile)
     db.commit()
@@ -113,7 +115,7 @@ def set_env_for_plant(request: PlantRequest, db: Session = Depends(get_db)):
         # # ✅ 라즈베리파이 IP (로컬임시서버버)
         RASPBERRY_PI_URL = "http://127.0.0.1:5001/receive-env" 
         send_data = {
-            "plant_name": plant_name,
+            # "plant_name": plant_name,
             **env
         }
         r = requests.post(RASPBERRY_PI_URL, json=send_data)
