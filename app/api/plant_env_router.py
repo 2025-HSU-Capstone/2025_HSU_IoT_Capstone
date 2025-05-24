@@ -112,8 +112,8 @@ def set_env_for_plant(request: PlantRequest, db: Session = Depends(get_db)):
 
      # ✅ 라즈베리파이로 전송
     try:
-        # # ✅ 라즈베리파이 IP (로컬임시서버버)
-        RASPBERRY_PI_URL = "http://127.0.0.1:5001/receive-env" 
+        # # ✅ 라즈베리파이 IP (로컬임시서버)
+        RASPBERRY_PI_URL = "http://192.168.137.156:5000/env" #같은은 와이파이이
         send_data = {
             # "plant_name": plant_name,
             **env
