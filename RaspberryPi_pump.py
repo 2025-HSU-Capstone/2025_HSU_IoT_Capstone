@@ -69,12 +69,14 @@ while True:
 
             if line.startswith("TEMP:"):
                 try:
-                    line = line.replace("TEMP:", "").replace("HUMI:", "").replace("SOIL:", "")
-                    temp, humi, soil = map(float, line.split())
+                    # ✅ "TEMP:24.5 HUMI:60.0 SOIL:512 LIGHT:300" 형식 파싱
+                    tokens = line.replace("TEMP:", "").replace("HUMI:", "").replace("SOIL:", "").replace("LIGHT:", "").split()
+                    temp, humi, soil, light = map(float, tokens)
 
                     print(f"🌡 온도: {temp}°C → {'✅ 정상' if temp_range['min'] <= temp <= temp_range['max'] else '⚠️ 범위 벗어남'}")
                     print(f"💧 습도: {humi}% → {'✅ 정상' if humi_range['min'] <= humi <= humi_range['max'] else '⚠️ 범위 벗어남'}")
                     print(f"🌱 토양 수분: {soil} → {'✅ 정상' if soil_range['min'] <= soil <= soil_range['max'] else '⚠️ 범위 벗어남'}")
+                    print(f"🔆 조도: {light} (단위 없음, ADC 값)")  # ✅ 조도 단순 출력
                 except Exception as e:
                     print(f"❌ 파싱 오류: {e} - 원문: {line}")
                 break

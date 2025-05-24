@@ -1,6 +1,4 @@
-# server.py
-
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import json
 
 app = Flask(__name__)
@@ -13,6 +11,16 @@ def get_env():
         return jsonify(data), 200
     except FileNotFoundError:
         return jsonify({'error': 'env.json not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/env', methods=['POST'])
+def save_env():
+    try:
+        data = request.get_json()
+        with open('env.json', 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        return jsonify({'message': 'env.json 저장 완료'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

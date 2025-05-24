@@ -6,6 +6,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 int SoilPin = A0;          // 토양 수분 센서 (아날로그)
+int LightSensorPin = A1;   // ✅ 조도 센서 핀 추가
 int lightPin = 4;          // 조명 제어 핀 (릴레이 또는 LED)
 int AA = 10;               // 워터펌프 제어 핀 A (모터 드라이버 IN1)
 int AB = 6;                // 워터펌프 제어 핀 B (모터 드라이버 IN2)
@@ -71,6 +72,7 @@ void loop() {
       float h = dht.readHumidity();
       float t = dht.readTemperature();
       int moisture = analogRead(SoilPin);
+      int light = analogRead(LightSensorPin);
 
       if (isnan(h) || isnan(t)) {
         Serial.println("❌ DHT 센서 읽기 실패");
@@ -81,6 +83,8 @@ void loop() {
         Serial.print(h);
         Serial.print(" SOIL:");
         Serial.println(moisture);
+        Serial.print(" LIGHT:");
+        Serial.println(light);
       }
     }
   }
