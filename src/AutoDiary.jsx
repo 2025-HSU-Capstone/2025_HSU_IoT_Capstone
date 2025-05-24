@@ -82,7 +82,7 @@ const AutoDiarySection = () => {
             <DateContainer>
               <DateText>{data.date} ({data.day})</DateText>
               <SmallPhoto
-                src={`http://localhost:8000${data.photo_path}`}
+                src={`data.photo_path`}
                 alt="식물 사진"
               />
             </DateContainer>

@@ -45,6 +45,32 @@ export const ContentWrapper = styled.div`
   }
 `;
 
+export const EnvCard = styled.div`
+  background-color: #ffffff;
+  border-radius: 4px;                   // ⛔ 둥글지 않게
+  padding: 32px;
+  margin-top: 40px;
+  width: 90%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15); // 종이 그림자
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+  border: 1px solid #ccc;
+`;
+
+export const infoStyle = {
+  background: '#f6fff6',
+  borderRadius: '8px',
+  padding: '12px 16px',
+  fontSize: '0.95rem',
+  boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)',
+  lineHeight: 1.5
+};
+
 // ✅ 자동일기 전용 카드 스타일
 export const DiaryCard = styled.div`
   background-color: #ffffff;

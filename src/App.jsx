@@ -39,9 +39,7 @@ function App() {
       </Container>
 
       {/* ✅ 제목 아래, 독립된 말풍선 위치 */}
-      <FloatingPlantForm>
         <PlantSetter />
-      </FloatingPlantForm>
     <div style={{ paddingTop: '80px' }}>
       {/* 📘 자동 식물 일기 */}
       <ContentWrapper>
