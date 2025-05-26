@@ -63,8 +63,9 @@ void loop() {
     else if (cmd == "READ_SENSOR") {
       float h = dht.readHumidity();
       float t = dht.readTemperature();
-      int moisture = analogRead(SoilPin);
-      int light = 1023 - analogRead(LightSensorPin);  // ✅ 밝을수록 값 ↑
+      int moisture_raw = analogRead(SoilPin);
+      float soil_percent = 100.0 - (moisture_raw / 1023.0) * 100.0;
+      int light = 1023 - analogRead(LightSensorPin);  // 밝을수록 값 ↑
 
       if (isnan(h) || isnan(t)) {
         Serial.println("❌ DHT 센서 읽기 실패");
@@ -74,7 +75,7 @@ void loop() {
         Serial.print(" HUMI:");
         Serial.print(h);
         Serial.print(" SOIL:");
-        Serial.print(moisture);
+        Serial.print(soil_percent, 1);  // 수분 퍼센트 값만 출력
         Serial.print(" LIGHT:");
         Serial.println(light);
       }
