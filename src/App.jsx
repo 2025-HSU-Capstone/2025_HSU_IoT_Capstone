@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { Container, HeaderText, ContentWrapper, LayoutWrapper, FloatingPlantForm } from './styles/styledComponents';
+import { WoodenTitleBox, Container, HeaderText, ContentWrapper, LayoutWrapper, FloatingPlantForm } from './styles/styledComponents';
 import Header from './Header';
 import AutoDiarySection from './AutoDiary';
 import GrowthChart from './GrowthChart';
@@ -44,7 +44,7 @@ function App() {
       {/* 📘 자동 식물 일기 */}
       <ContentWrapper>
         <section id="auto-diary" className="mb-12">
-        <h2 className="text-2xl font-bold text-green-600 mb-4"> 자동식물일기</h2>
+          <WoodenTitleBox>자동식물일기</WoodenTitleBox>
           <AutoDiarySection />
         </section>
       </ContentWrapper>
@@ -52,7 +52,7 @@ function App() {
       {/* 📈 키 변화 그래프 */}
       <ContentWrapper>
         <section id="growth-chart" className="mb-12">
-          <h2 className="text-2xl font-bold text-green-600 mb-4">키 변화 그래프</h2>
+         <WoodenTitleBox>키 변화 그래프</WoodenTitleBox>
           <GrowthChart />
         </section>
       </ContentWrapper>
@@ -60,7 +60,7 @@ function App() {
       {/* 📸 타임랩스 */}
       <ContentWrapper>
         <section id="timelapse" className="mb-12">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">타임랩스</h2>
+          <WoodenTitleBox>타임랩스</WoodenTitleBox>
           <TimelapseViewer />
         </section>
       </ContentWrapper>

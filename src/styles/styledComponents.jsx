@@ -303,3 +303,100 @@ export const PlantSpeech = ({ children }) => (
     <ChatLeft>{children}</ChatLeft>
   </ChatRowLeft>
 );
+
+// styledComponents.jsx 내부
+export const WoodenTitleBox = styled.div`
+  position: relative;
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  background-color: #8b5e3c;
+  background-size: cover;
+  color: #eee2c2;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: 'Gamja Flower', sans-serif;
+  padding: 18px 32px;
+  width: fit-content;
+  max-width: 90%;
+  text-align: center;
+  margin: 40px 0 24px 0;
+  clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  line-height: 1.4;
+
+  /* ✅ 텍스트 음각 효과 */
+  text-shadow:
+    -2px -2px 2px rgba(0, 0, 0, 0.5);
+     0 1px 0 rgba(0, 0, 0, 0.1);
+  /* ✅ 안쪽 입체 그림자 */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow:
+      inset 0 1px 2px rgba(255, 255, 255, 0.3),
+      inset 0 -2px 2px rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
+
+  /* ✅ 왼쪽 못 도트 */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+    background-color: #333;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3);
+    z-index: 2;
+  }
+
+  /* ✅ 오른쪽 못 도트 (두 번째 가상 요소는 직접 span 추가 필요) */
+  span.nail {
+    position: absolute;
+    top: 6px;
+    right: 30px;
+    width: 8px;
+    height: 8px;
+    background-color: #333;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3);
+    z-index: 2;
+  }
+`;
+
+
+// 각 제목 나무화살표표
+// export const WoodenTitleBox = styled.div`
+//   position: relative;
+//   background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+//   background-color: #8b5e3c; /* 나무색 배경과 패턴 조화 */
+//   background-size: auto;
+//   padding: 24px 32px;
+//   margin: 40px 0 24px 0;
+//   border-radius: 8px;
+//   color: #fffbe6;
+//   font-size: 1.5rem;
+//   font-weight: 700;
+//   font-family: 'Gamja Flower', sans-serif;
+//   text-align: center;
+//   width: fit-content;
+//   max-width: 90%;
+//   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+//   text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+
+//   &::after {
+//     content: "";
+//     position: absolute;
+//     right: -20px;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     width: 0;
+//     height: 0;
+//     border-top: 16px solid transparent;
+//     border-bottom: 16px solid transparent;
+//     border-left: 20px solid #5a3d28;
+//   }
+// `;

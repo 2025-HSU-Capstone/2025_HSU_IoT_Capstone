@@ -81,10 +81,16 @@ const AutoDiarySection = () => {
           <DiaryCard style={{ boxShadow: 'none', marginTop: 0, marginBottom: 0 }}>
             <DateContainer>
               <DateText>{data.date} ({data.day})</DateText>
-              <SmallPhoto
-                src={`data.photo_path`}
-                alt="식물 사진"
-              />
+              
+              {/* ✅ 여기가 핵심 수정 부분 */}
+              {data.photo_path && (() => {
+                const baseUrl = "https://res.cloudinary.com/dawjwfi88/image/upload/";
+                const fullUrl = data.photo_path.startsWith("http")
+                  ? data.photo_path
+                  : `${baseUrl}${data.photo_path.replace(/^\/+/, '')}`;
+                return <SmallPhoto src={fullUrl} alt="식물사진" />;
+              })()}
+
             </DateContainer>
 
             <h3>🌱 센서 정보</h3>

@@ -1,24 +1,29 @@
-# Logs
-logs
+# ✅ Node.js 패키지
+node_modules/
+
+# ✅ 빌드 결과물 (Vite 등 사용 시)
+dist/
+
+# ✅ 환경변수 파일 (보안)
+.env
+.env.*.local
+
+# ✅ 캐시 및 로그
+.vite/
+.cache/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# ✅ 운영체제/에디터 별 불필요 파일
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+.vscode/
+.idea/
+
+# ✅ 개발 중 생기는 파일
+*.local
+*.tmp
+
+# ✅ 특정 파일 무시 (예시: 마스킹된 내부 컴포넌트 등)
+src/trigger_router.py
+src/detect_updateDB_rout.py
+
