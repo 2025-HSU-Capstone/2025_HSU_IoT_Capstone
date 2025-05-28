@@ -1,4 +1,4 @@
-# 🌱 2025 HSU IoT 캡스톤 디자인 – 스마트팜 시스템
+# 🌱 2025 HSU IoT Capstone Design – 스마트팜 시스템
 
 **한성대학교 2025 캡스톤디자인 디자인 : AI와 IoT가 만들어주는 자동 식물 성장 케어 시스템**
 
@@ -7,13 +7,15 @@
 ## 📁 프로젝트 구조
 
 ```
-2025_HSU_IoT_캡스톤/
-├── camera/ # CSI 카메라를 통한 이미지 캡처 및 처리
-├── detection/ # YOLOv8을 활용한 식물 및 화분 감지
-├── measurement/ # 바운딩 박스를 기반으로 한 식물 키 측정
-├── data/ # 측정된 데이터 저장 및 관리
-├── utils/ # 보조 함수 및 스크립트
-└── README.md # 프로젝트 설명서
+2025_HSU_IoT_Capstone/
+├── detectPlant/            # 카메라 모듈3, YOLO, ArUco Marker를 이용하여 식물의 키 측정
+├── captureEveryAnHour/     # 한 시간마다 식물 사진 촬영
+├── raspberryPi/            # 자동 센싱, 센서 상태 확인, 하루에 한 번 사진 촬영 및 센서 값 전송
+├── arduino/                # Arduino UNO 보드에 업로드
+├── server/                 # 프론트 / 백엔드 Flask 서버와 통신
+├── dev/frontend            # 프론트 : 자동 일기, 성장 지표 그래프, 타임 랩스 생성
+├── dev/backend             # 백엔드 : 각 센서들의 수치, 사진 및 데이터 저장
+└── README.md               # 프로젝트 설명서
 ```
 
 ## 🌱 주요 기능
@@ -28,41 +30,44 @@
 ## 🛠️ 설치 및 실행 방법
 
 1. **저장소 클론**:
- '''bash'''
-   git 클론 https://github.com/2025-HSU-Capstone/2025_HSU_IoT_Capstone.git
-   CD 2025_HSU_IoT_Capstone
+   ```bash
+   git clone https://github.com/2025-HSU-Capstone/2025_HSU_IoT_Capstone.git
+   cd 2025_HSU_IoT_Capstone
    ```
 
 2. **가상 환경 설정 및 의존성 설치**:
- '''bash'''
-   파이썬 3 - m venv venv
-   소스 venv/bin/activate # Windows 의 경우: .\\venv\\Scripts\\activate
-   pip 설치 -r 요구 사항.txt
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # Windows의 경우: .\venv\Scripts\activate
+   pip install -r requirements.txt
    ```
 
 3. **모델 다운로드**:
- YOLOv8 모델을 다운로드하여 `detection/` 디렉토리에 저장합니다.
+   YOLOv8 모델을 다운로드하여 `detection/` 디렉토리에 저장합니다.
 
 4. **스크립트 실행**:
- '''bash'''
-   파이썬 측정/측정_높이.py
+   ```bash
+   python measurement/measure_height.py
    ```
 
 ## 📊 데이터 예시
 
-| 날짜 및 시간 | 식물 키 (cm) | 온도 | 습도 | 조도 | 토양 수분 (%) |
+| 날짜 및 시간         | 식물 키 (cm) | 온도    | 습도    | 조도    | 토양 수분 (%) |
 |---------------------|--------------|---------|--------|---------|-----------|
-| 2025-05-26 10:00:00 | 12.7 | 25.4 | 50 | 71 | 68 |
-| 2025-05-26 11:00:00 | 12.8 | 25.8 | 49 | 77 | 68 |
-| 2025-05-26 12:00:00 | 13.0 | 26.1 | 47 | 82 | 66 |
+| 2025-05-26 12:00:00 | 12.7         | 25.4    | 50     | 71      | 68        |
+| 2025-05-27 12:00:00 | 13.1         | 25.8    | 49     | 77      | 68        |
+| 2025-05-28 12:00:00 | 13.5         | 25.7    | 47     | 82      | 66        |
+
+## 결과물 예시
+
 
 ## 👥 팀원 소개
 
-| 이름 | 역할 |
+| 이름   | 역할                     |
 |--------|--------------------------|
 | 허현준 | 식물 키 측정 알고리즘 개발 및 타임랩스 자동 생성 구현 |
 | 이현승 | 자동 센서 제어 및 데이터 처리, 자동 일기 작성 구현 |
-| 이나은은 | 데이터 분석 및 시각화, DB 설계 및 웹 UI 구현 |
+| 이나은 | 데이터 분석 및 시각화, DB 설계 및 웹 UI 구현 |
 
 ## 📄 라이선스
 
