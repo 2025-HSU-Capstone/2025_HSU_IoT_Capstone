@@ -1,7 +1,5 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 from datetime import datetime
-import json
 from pathlib import Path
 
 from app.db.database import engine, get_db
@@ -13,6 +11,7 @@ from app.api import diary_router
 from app.api import upload_photo_router
 from app.api import trigger_env_router
 from app.api import plant_env_router 
+
 #프론트 요청 허용
 from fastapi.middleware.cors import CORSMiddleware
 #브라우저에 정적 파일 서빙
@@ -50,6 +49,7 @@ app.include_router(trigger_env_router.router)
 
 app.include_router(plant_env_router.router) 
 
+
 @app.get("/")
 def root():
     return {"message": "SmartParm 백엔드 준비 완료!"}
@@ -71,5 +71,7 @@ app.mount(
 # git push origin dev/backend
 
 # uvicorn main:app --reload
+# uvicorn main:app --host 0.0.0.0 --port 8000
 # http://localhost:8000/docs
-#http://localhost:8000/images/img_002.jpg
+# http://localhost:8000/images/img_002.jpg
+# http://192.168.137.206:8000/docs

@@ -31,15 +31,22 @@ def generate_env_with_gpt(plant_name: str) -> dict:
 식물 "{plant_name}"을 건강하게 키우기 위한 환경 기준을 아래 형식으로 JSON으로 반환해 주세요.
 각 항목의 값은 일반적인 평균 수치를 기준으로 하되, 현실적으로 존재해야 하며 단위를 포함하지 않습니다.
 
+❗아래 형식 그대로 key와 구조를 유지하고, 반드시 "watering_duration_sec" 값은 숫자 3으로 고정해 주세요.  
+❗설명 없이 JSON만 정확히 반환해 주세요.
+
 형식 예시:
 {{
-  "temperature": float,          // 예: 24.0 (°C)
-  "humidity": float,             // 예: 60.0 (%)
-  "co2": int,                   // 예: 400 (ppm)
-  "light": int,                // 예: 7000 (lux)
-  "soil_moisture": int,         // 예: 70 (%)
-  "watering_amount": int,     // 하루 급수량 (mL 단위, 예: 300)
-  "light_hours": int          // 하루 조명 시간 (예: 12)
+  "temperature": {{ "min": int, "max": int }},
+  "humidity": {{ "min": int, "max": int }},             // 적정 습도 범위 (%)
+  "soil_moisture": {{ "min": int, "max": int }},        // 토양 습도 범위 (%)
+  "light_cycle": {{
+    "on": "HH:MM",                                     // 조명 시작 시간 (24시간 형식)
+    "off": "HH:MM"                                     // 조명 종료 시간
+  }},
+  "watering_interval_hours": int,                      // 하루 몇 시간 간격으로 급수할지 (예: 8)
+  "watering_duration_sec": 3,                         // 반드시 "watering_duration_sec" 값은 3으로 고정해 주세요. 
+  "co2": int,
+  "light": int                         // 1회 급수 시간 (초 단위, 예: 3)
 }}
 
 반드시 JSON만 출력해 주세요.
@@ -89,6 +96,10 @@ def set_env_for_plant(request: PlantRequest, db: Session = Depends(get_db)):
     env = generate_env_with_gpt(plant_name)
     if not env:
         raise HTTPException(status_code=500, detail="모델에서 기준값 생성 실패")
+    # ✅ 여기! GPT 응답을 받은 직후 강제로 고정
+    env["watering_duration_sec"] = 3
+    
+    print("✅ 덮어쓰기 완료: watering_duration_sec =", env["watering_duration_sec"])
     print("📦 최종 GPT env:", env)
     print("📦 필드 타입:", {k: type(v) for k, v in env.items()})
 
@@ -98,14 +109,21 @@ def set_env_for_plant(request: PlantRequest, db: Session = Depends(get_db)):
     #     raise HTTPException(status_code=404, detail="해당 식물에 대한 환경 기준이 없습니다.")
 
     # ✅ STEP 3: DB에 저장
+    # ✅ 필수 필드 검증
+    required_keys = ["co2", "light"]
+    missing = [key for key in required_keys if key not in env]
+    if missing:
+        raise HTTPException(status_code=500, detail=f"GPT 응답에 누락된 필드: {', '.join(missing)}")
+
     profile = PlantEnvProfile(
         plant_name=plant_name,
-        temperature=float(env["temperature"]),
-        humidity=float(env["humidity"]),
-        co2=int(env["co2"]),
-        light=int(env["light"]),
-        soil_moisture=int(env["soil_moisture"]),
+        temperature=(env["temperature"]["min"] + env["temperature"]["max"]) / 2,
+        humidity=(env["humidity"]["min"] + env["humidity"]["max"]) / 2,
+        co2=int(env["co2"]),  # GPT 응답엔 없음 → 기본값 또는 계산 필요
+        light=int(env["light"]),  # light_cycle 기준 추정 필요
+        soil_moisture=(env["soil_moisture"]["min"] + env["soil_moisture"]["max"]) / 2,
     )
+
     db.add(profile)
     db.commit()
     db.refresh(profile)
@@ -113,11 +131,14 @@ def set_env_for_plant(request: PlantRequest, db: Session = Depends(get_db)):
      # ✅ 라즈베리파이로 전송
     try:
         # # ✅ 라즈베리파이 IP (로컬임시서버)
-        RASPBERRY_PI_URL = "http://192.168.137.156:5000/env" #같은은 와이파이이
+        RASPBERRY_PI_URL = "http://192.168.137.156:8000/set_env" #같은은 와이파이이
         send_data = {
             # "plant_name": plant_name,
-            **env
+            k: v for k, v in env.items()
+            if k not in ["co2", "light"]
         }
+        send_data["watering_duration_sec"] = 3  
+        print("✅ 덮어쓰기 완료: watering_duration_sec =", send_data["watering_duration_sec"])
         r = requests.post(RASPBERRY_PI_URL, json=send_data)
         r.raise_for_status()
         print(f"✅ 라즈베리파이에 전송 완료: {r.status_code}")

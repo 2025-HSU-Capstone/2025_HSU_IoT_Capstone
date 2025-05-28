@@ -65,6 +65,7 @@ def get_diary_json(date_str: str, db: Session = Depends(get_db)):
 
     # ✅ 대표 사진 (있다면 1장만)
     photo = db.query(Photo).filter(Photo.log_id == log.id).first()  # ✅ log_id를 기준으로 대표 사진 1장 가져오기
+    print("📸 최종 반환되는 photo_path:", photo.photo_path if photo else "사진 없음")
 
     # ✅ diary 처리: 이미 있는 경우 vs 없는 경우 구분
     if log.diary_id:
@@ -116,6 +117,6 @@ def get_diary_json(date_str: str, db: Session = Depends(get_db)):
             "co2": env.co2_level
         },
         "diary": diary_text,
-        "photo_path": f"/{photo.photo_path.lstrip('/')}" if photo else None,
+        "photo_path": photo.photo_path if photo else None,
         "already_saved": already_saved  # ✅ 중복 생성 여부 반환
     }

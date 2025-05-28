@@ -14,7 +14,7 @@ class GrowthData(Base):
 class EnvData(Base):
     __tablename__ = "env_data"
     id = Column(Integer, primary_key=True, index=True)
-    soil_moisture = Column(Integer)
+    soil_moisture = Column(Float)
     light_level = Column(Integer)
     temperature = Column(Float)
     humidity = Column(Float)
@@ -32,13 +32,14 @@ class PlantLog(Base):
     height_id = Column(Integer, ForeignKey("growth_data.id"))
     env_id = Column(Integer, ForeignKey("env_data.id"))
     diary_id = Column(Integer, ForeignKey("diary_entries.id"))
+    photo_id = Column(Integer, ForeignKey("photos.id"), nullable=True)
     event = Column(String(255))
     day = Column(String(10))
 
     height = relationship("GrowthData")
     env = relationship("EnvData")
     diary = relationship("DiaryEntry")
-    photos = relationship("Photo", back_populates="log", cascade="all, delete")
+    photos = relationship("Photo", back_populates="log", cascade="all, delete", foreign_keys="Photo.log_id")
 
 class Photo(Base):
     __tablename__ = "photos"
@@ -46,7 +47,7 @@ class Photo(Base):
     photo_path = Column(Text)
     log_id = Column(Integer, ForeignKey("plant_logs.id"))
 
-    log = relationship("PlantLog", back_populates="photos")
+    log = relationship("PlantLog", back_populates="photos", foreign_keys=[log_id] )
 
 class PlantEnvProfile(Base):
     __tablename__ = "plant_env_profiles"

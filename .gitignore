@@ -1,16 +1,36 @@
-# 환경 변수 파일
-.env
-
-# Python 캐시
+# 🐍 Python 캐시 및 임시 파일
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+*.pyd
 
-# 가상환경 (혹시 폴더로 생성했다면)
-venv/
-env/
+# 🔐 환경 변수
+.env
+.env.*
 
-# VSCode 설정 (협업 시 무시해도 OK)
+# 🧪 테스트/로그
+*.log
+*.tmp
+*.bak
+
+# ⚙️ 에디터 설정
 .vscode/
-
-# Mac 시스템 파일 (혹시 Mac에서 열었을 경우 대비)
+.idea/
 .DS_Store
+Thumbs.db
+
+# 🖼️ 로컬 이미지 및 데이터 파일 (GitHub에 올릴 필요 없음)
+data/images/
+data/*.json
+
+# 🧬 seeders 중 제외할 파일
+seeders/seed_env.py
+seeders/seed_growth.py
+seeders/seed_logs.py
+seeders/seed_photos.py
+seeders/seed_cloudinary_upload.py
+seeders/seed.py
+
+app/services/timelapse/images/
+
+app/services/__pycache__
