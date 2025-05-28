@@ -29,26 +29,45 @@
 
 ## 🛠️ 설치 및 실행 방법
 
-1. **저장소 클론**:
-   ```bash
-   git clone https://github.com/2025-HSU-Capstone/2025_HSU_IoT_Capstone.git
-   cd 2025_HSU_IoT_Capstone
-   ```
+### 1. Raspberry Pi에서 실행
 
-2. **가상 환경 설정 및 의존성 설치**:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # Windows의 경우: .\venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+- 카메라 및 센서 장치가 연결된 라즈베리파이에서 실행합니다.
 
-3. **모델 다운로드**:
-   YOLOv8 모델을 다운로드하여 `detection/` 디렉토리에 저장합니다.
+```bash
+# 저장소 클론
+git clone https://github.com/2025-HSU-Capstone/2025_HSU_IoT_Capstone.git
+cd 2025_HSU_IoT_Capstone/raspberrypi
 
-4. **스크립트 실행**:
-   ```bash
-   python measurement/measure_height.py
-   ```
+# 가상환경 생성 및 활성화
+python3 -m venv venv
+source venv/bin/activate
+
+# 필요 패키지 설치
+pip install -r requirements.txt
+
+# 메인 스크립트 실행 (예: 1시간마다 촬영 및 서버 전송)
+python RaspberryPi_last.py
+```
+
+### 2. GPU 서버에서 YOLO + SAM 추론 서버 실행
+
+```bash
+cd AI_capstone
+# 가상환경 진입 후
+python infer_loop.py  # 새 이미지 생성 시 자동 추론 및 서버 전송
+```
+
+### 3. 3. Flask 서버 실행 (레시피 생성 등)
+
+```bash
+cd server
+# 환경 변수 설정 (.env 파일 필요)
+export FLASK_APP=server.py
+flask run --host=0.0.0.0 --port=5000
+```
+
+⚠️ 모든 디바이스는 동일한 네트워크(Wi-Fi) 상에 있어야 합니다.
+
 
 ## 📊 데이터 예시
 
@@ -58,7 +77,7 @@
 | 2025-05-27 12:00:00 | 13.1         | 25.8    | 49     | 77      | 68        |
 | 2025-05-28 12:00:00 | 13.5         | 25.7    | 47     | 82      | 66        |
 
-## 결과물 예시
+## 📝 결과물
 
 
 ## 👥 팀원 소개
