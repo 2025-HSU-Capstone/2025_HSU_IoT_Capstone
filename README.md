@@ -10,7 +10,7 @@
 2025_HSU_IoT_Capstone/
 ├── DetectPlant/            # 카메라 모듈3, YOLO, ArUco Marker를 이용하여 식물의 키 측정
 ├── CaptureEveryAnHour/     # 한 시간마다 식물 사진 촬영
-├── AutoSensorControl/            # 자동 센싱, 센서 상태 확인, 하루에 한 번 사진 촬영 및 센서 값 전송
+├── AutoSensorControl/      # 자동 센싱, 센서 상태 확인, 하루에 한 번 사진 촬영 및 센서 값 전송
 ├── Arduino/                # Arduino UNO 보드에 업로드
 ├── server/                 # 프론트 / 백엔드 Flask 서버와 통신
 ├── dev/frontend            # 프론트 : 자동 일기, 성장 지표 그래프, 타임 랩스 생성
