@@ -177,11 +177,11 @@ while True:
             last_watered = datetime.now()
             print("✅ 물 주기 완료")
 
-        if now.hour == 20 and now.minute == 35 and not status_sent_today:
+        if now.hour == 12 and not status_sent_today:
             print("📤 상태 자동 전송 중...")
             send_current_status(temp, humi, light, soil)
             status_sent_today = True
-        if now.hour != 20 or now.minute != 35:
+        if now.hour != 12:
             status_sent_today = False
 
         if now.minute == 0 and now.hour != last_photo_hour:
